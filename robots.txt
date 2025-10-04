@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://francescaolivia.netlify.app/sitemap.xml

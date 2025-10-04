@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="favicon.png" rel="icon" type="image/png"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Francesca Olivia – Perfumería artesanal</title>
+<meta content="Perfumería artesanal Francesca Olivia. Aromas únicos y de calidad. Descubre nuestro catálogo completo y compra fácilmente por email." name="description"/>
+<meta content="vp5O9M8ZYmnB12lcuFvT4bGJgkL2vcuofpxnKhSO5ek" name="google-site-verification">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+      --primary-color: #2C3E50;
+      --secondary-color: #D4AF37;
+      --accent-color: #F4D03F;
+      --text-dark: #2C3E50;
+      --text-light: #666;
+      --bg-cream: #f9f7f2;
+      --bg-light: #f3f1e9;
+      --shadow: 0 8px 32px rgba(0,0,0,0.1);
+      --shadow-hover: 0 16px 48px rgba(0,0,0,0.15);
+      --border-radius: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-light) 100%);
+      color: var(--text-dark);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+
+    /* Animaciones globales */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Header mejorado */
+    header {
+      background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    header img {
+      width: 280px;
+      height: auto;
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Hero section mejorado */
+    .hero-section {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(244, 208, 63, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5em;
+      margin-bottom: 30px;
+      color: var(--secondary-color);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      letter-spacing: 3px;
+      background: linear-gradient(45deg, #D4AF37, #F4D03F, #D4AF37);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4em;
+      margin-bottom: 20px;
+      opacity: 0.95;
+      font-weight: 300;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5em;
+      color: var(--accent-color);
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    .hero-description {
+      font-size: 1.1em;
+      opacity: 0.85;
+      max-width: 700px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .decorative-line {
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color), var(--secondary-color));
+      margin: 40px auto;
+      border-radius: 2px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Contenido principal */
+    .main-content {
+    padding: 80px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-light) 100%);
+    min-height: 100vh;
+    } 
+
+    .section {
+      margin-bottom: 100px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8em;
+      margin-bottom: 60px;
+      color: var(--text-dark);
+      position: relative;
+      font-weight: 700;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color), var(--secondary-color));
+      border-radius: 2px;
+    }
+
+    /* Galería interactiva mejorada */
+    .galeria-interactiva {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,246,240,0.9));
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+    .imagen-principal {
+      margin-bottom: 30px;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .imagen-principal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .imagen-principal:hover::before {
+      opacity: 1;
+    }
+
+    .imagen-principal img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+      transition: all 0.5s ease;
+      transform: scale(1);
+    }
+
+    .imagen-principal:hover img {
+      transform: scale(1.05);
+    }
+
+    .galeria-miniaturas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 20px;
+    }
+
+    .miniatura-item {
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .miniatura-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s ease;
+      z-index: 2;
+    }
+
+    .miniatura-item:hover::before {
+      left: 100%;
+    }
+
+    .miniatura-item:hover, .miniatura-item.activa {
+      border-color: var(--secondary-color);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    }
+
+    .miniatura-item img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .miniatura-item:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Botones mejorados */
+    .email-btn {
+      display: inline-block;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--primary-color), #34495E);
+      color: white;
+      border: 2px solid var(--secondary-color);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      box-shadow: 0 6px 20px rgba(44, 62, 80, 0.2);
+      margin: 8px;
+      position: relative;
+      overflow: hidden;
+      font-size: 1.1em;
+    }
+
+    .email-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .email-btn:hover::before {
+      left: 100%;
+    }
+
+    .email-btn:hover {
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      color: var(--text-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+    }
+
+    .email-btn.large {
+      font-size: 1.3em;
+      padding: 20px 40px;
+      margin: 30px auto;
+      display: block;
+      width: fit-content;
+    }
+
+    /* Grid de fragancias mejorado */
+    .fragancias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+    }
+
+    .fragancia-category {
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,246,240,0.9));
+    border-radius: var(--border-radius);
+    padding: 35px;
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(5px);
+  }
+
+    .fragancia-category::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color), var(--secondary-color));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .fragancia-category:hover::before {
+      transform: scaleX(1);
+    }
+
+    .fragancia-category:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .fragancia-category h3 {
+      color: var(--text-dark);
+      font-size: 1.8em;
+      margin-bottom: 25px;
+      text-align: center;
+      position: relative;
+      padding-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .fragancia-category h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+
+    .fragancia-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .fragancia-item {
+      background: linear-gradient(135deg, var(--bg-cream), var(--bg-light));
+      padding: 10px 16px;
+      border-radius: 25px;
+      font-size: 0.95em;
+      color: var(--text-dark);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fragancia-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.4s ease;
+    }
+
+    .fragancia-item:hover::before {
+      left: 100%;
+    }
+
+    .fragancia-item:hover {
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+      border-color: var(--accent-color);
+    }
+
+    .recomendados {
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .recomendados:hover {
+      background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(212, 175, 55, 0.4);
+    }
+
+    /* Tablas mejoradas */
+    .textiles-table {
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,246,240,0.9));
+    border-radius: var(--border-radius);
+    overflow-x: auto; /* <- ESTE ES EL CAMBIO */
+    box-shadow: var(--shadow);
+    margin-top: 50px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+    .textiles-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .textiles-table th {
+      background: linear-gradient(135deg, var(--primary-color), #34495E);
+      color: white;
+      padding: 20px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    .textiles-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    transition: background-color 0.3s ease;
+    background: rgba(255,255,255,0.7);
+  }
+
+    .textiles-table tr:hover {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(244, 208, 63, 0.1));
+  }
+
+    /* Corrección: Se aumentó la especificidad del selector para que el fondo se aplique correctamente */
+    .textiles-table .precio {
+    font-weight: 800;
+    font-size: 1.3em;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+    /* Secciones de contenido mejoradas */
+    .content-box {
+    max-width: 900px;
+    margin: 50px auto;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,246,240,0.95));
+    padding: 50px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    font-size: 1.2em;
+    color: var(--text-light);
+    line-height: 1.8;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    }
+
+    .content-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color), var(--secondary-color));
+    }
+
+    .content-box p {
+      margin-bottom: 25px;
+    }
+
+    .content-box strong {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .content-box hr {
+      margin: 30px 0;
+      border: none;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+    }
+
+    /* Cards grid mejorado */
+    .cards-grid {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      max-width: 1200px;
+      margin: 50px auto;
+    }
+
+    .card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,246,240,0.9));
+    padding: 35px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+  }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card h3 {
+      color: var(--text-dark);
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* Tabla guía mejorada */
+    .guide-table {
+      overflow-x: auto;
+      max-width: 1000px;
+      margin: 50px auto;
+    }
+
+    .guide-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,246,240,0.9));
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    backdrop-filter: blur(5px);
+  }
+
+    .guide-table th {
+      background: linear-gradient(135deg, var(--primary-color), #34495E);
+      color: white;
+      padding: 20px;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    .guide-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.7);
+  }
+
+    .guide-table tr:hover {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(244, 208, 63, 0.1));
+    transform: scale(1.02);
+  }
+
+    /* Sección de contacto mejorada */
+    .contact-section {
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,246,240,0.95));
+    border-radius: var(--border-radius);
+    padding: 60px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    margin-top: 60px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color), var(--secondary-color));
+    }
+
+    .contact-section h3 {
+      color: var(--text-dark);
+      font-size: 2.2em;
+      margin-bottom: 25px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .contact-section p {
+      font-size: 1.2em;
+      margin-bottom: 35px;
+      color: var(--text-light);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer mejorado */
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(135deg, var(--primary-color), #1a252f);
+      color: white;
+      margin-top: 80px;
+      position: relative;
+      font-size: 1.1em;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color), var(--secondary-color));
+    }
+
+    /* Responsive mejorado */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5em;
+        letter-spacing: 1px;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.2em;
+      }
+      
+      .section-title {
+        font-size: 2.2em;
+      }
+      
+      .fragancias-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .main-content {
+        padding: 50px 15px;
+      }
+
+      .content-box, .contact-section {
+        padding: 30px;
+        margin: 30px auto;
+      }
+
+      .galeria-miniaturas {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2em;
+      }
+      
+      .section-title {
+        font-size: 1.8em;
+      }
+      
+      .email-btn.large {
+        padding: 16px 24px;
+        font-size: 1.1em;
+      }
+    }
+
+    /* Efectos de scroll */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  
+
+/* Navbar sticky */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1000;
+  padding: 10px 20px;
+  box-shadow: var(--shadow);
+}
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.navbar a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.navbar a:hover {
+  color: var(--secondary-color);
+}
+    
+    /* ================================== */
+    /* ESTILOS DEL CARRITO Y MODAL */
+    /* ================================== */
+    .add-to-cart-btn {
+        background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+        color: var(--text-dark);
+        border: none;
+        padding: 8px 16px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .add-to-cart-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+    }
+    .cart-toggle {
+      position: fixed; bottom: 20px; right: 20px;
+      width: 65px; height: 65px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      border: none; cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; transition: all 0.3s ease;
+      z-index: 9998; color: var(--primary-color);
+    }
+    .cart-toggle:hover { transform: scale(1.1) rotate(10deg); }
+    .cart-count {
+        position: absolute; top: -5px; right: -5px;
+        background: #F44336; color: white;
+        border-radius: 50%; width: 24px; height: 24px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.8rem; font-weight: bold;
+    }
+    .cart-modal {
+        position: fixed; top: 0; right: -100%;
+        width: 100%; max-width: 450px; height: 100vh;
+        background: var(--bg-cream);
+        box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+        z-index: 10000;
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        display: flex; flex-direction: column;
+    }
+    .cart-modal.active { right: 0; }
+    .cart-overlay {
+        position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 9999; opacity: 0; visibility: hidden;
+        transition: all 0.3s;
+    }
+    .cart-overlay.active { opacity: 1; visibility: visible; }
+    .cart-header {
+        background: linear-gradient(135deg, var(--primary-color), #34495E);
+        color: white; padding: 1.5rem;
+        display: flex; justify-content: space-between; align-items: center;
+        border-bottom: 4px solid var(--secondary-color);
+    }
+    .cart-header h2 { font-family: 'Playfair Display', serif; display: flex; align-items: center; gap: 0.5rem;}
+    .close-cart {
+        background: none; border: none; color: white;
+        font-size: 1.8rem; cursor: pointer; transition: transform 0.3s;
+    }
+    .close-cart:hover { transform: rotate(90deg); }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1.5rem; }
+    .cart-item {
+        display: grid; grid-template-columns: 1fr auto;
+        gap: 1rem; align-items: center;
+        padding: 1rem; background: rgba(255,255,255,0.7);
+        border-radius: 10px; margin-bottom: 1rem;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-weight: bold; color: var(--text-dark); margin-bottom: 0.25rem; }
+    .cart-item-price { color: var(--secondary-color); font-weight: bold; }
+    .cart-item-controls { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; }
+    .quantity-btn {
+        width: 30px; height: 30px; border: none;
+        background: var(--primary-color); color: white;
+        border-radius: 50%; cursor: pointer; font-weight: bold;
+        transition: all 0.3s;
+    }
+    .quantity-btn:hover { background: var(--secondary-color); transform: scale(1.1); }
+    .quantity { font-weight: bold; min-width: 30px; text-align: center; }
+    .remove-item {
+        background: transparent; color: #F44336;
+        border: none; font-size: 1.2rem; cursor: pointer;
+        transition: all 0.3s;
+    }
+    .remove-item:hover { color: #d32f2f; transform: scale(1.2); }
+    .cart-empty { text-align: center; padding: 3rem 1rem; color: #999; }
+    .cart-empty i { font-size: 4rem; margin-bottom: 1rem; opacity: 0.3; }
+    .cart-footer {
+        padding: 1.5rem; border-top: 1px solid rgba(212, 175, 55, 0.2);
+        background: white; box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
+    }
+    .cart-total {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 1rem; font-size: 1.5rem; font-weight: bold;
+        color: var(--text-dark);
+    }
+    .cart-total .price { color: var(--secondary-color); }
+    .checkout-btn {
+        width: 100%; padding: 1rem;
+        background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+        color: var(--primary-color); border: none; border-radius: 10px;
+        font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s;
+        display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .checkout-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .checkout-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* Notification */
+    .notification {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        box-shadow: var(--shadow-hover);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+        z-index: 10001;
+        font-weight: bold;
+    }
+    .notification.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -80px);
+    }
+
+    /* Modal de Selección de Fragancia */
+    .fragrance-modal {
+        position: fixed; top: 50%; left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        background: white;
+        padding: 30px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-hover);
+        z-index: 10001;
+        width: 90%;
+        max-width: 500px;
+        opacity: 0; visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .fragrance-modal.active {
+        opacity: 1; visibility: visible;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    .fragrance-modal h3 {
+        font-family: 'Playfair Display', serif;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 1.8em;
+    }
+    .fragrance-modal select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 1.1em;
+        margin-bottom: 25px;
+    }
+    .fragrance-modal-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+    .modal-btn {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .modal-btn.confirm {
+        background: var(--secondary-color);
+        color: var(--primary-color);
+    }
+    .modal-btn.confirm:hover {
+        background: var(--accent-color);
+    }
+    .modal-btn.cancel {
+        background: #eee;
+        color: #777;
+    }
+     .modal-btn.cancel:hover {
+        background: #ddd;
+    }
+</style>
+</meta><meta content="Francesca Olivia – Perfumería artesanal" property="og:title"/><meta content="Fragancias artesanales para el hogar, textiles y difusores. Aromas únicos de Francesca Olivia." property="og:description"/><meta content="https://francescaolivia.netlify.app/logo.jpg" property="og:image"/><meta content="https://francescaolivia.netlify.app" property="og:url"/><meta content="website" property="og:type"/><meta content="summary_large_image" name="twitter:card"/><meta content="Francesca Olivia – Perfumería artesanal" name="twitter:title"/><meta content="Aromas únicos y de calidad para tu hogar." name="twitter:description"/><meta content="https://francescaolivia.netlify.app/logo.jpg" name="twitter:image"/><link href="https://francescaolivia.netlify.app" rel="canonical"/><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Francesca Olivia",
+  "image": "https://francescaolivia.netlify.app/logo.jpg",
+  "description": "Perfumería artesanal de fragancias para el hogar y textiles.",
+  "email": "esequielbelengimenez@gmail.com",
+  "url": "https://francescaolivia.netlify.app",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "AR"
+  }
+}</script></head>
+<body>
+<header>
+<img alt="Logo de Francesca Olivia Perfumería" src="imagenes/logo.jpg"/>
+</header>
+<nav class="navbar">
+<ul>
+<li><a aria-label="Sección Fragancias" href="#fragancias">Fragancias</a></li>
+<li><a aria-label="Sección Textiles y Home" href="#textiles">Catálogo</a></li>
+<li><a aria-label="Sección Preguntas Frecuentes" href="#faq">Preguntas</a></li>
+<li><a aria-label="Sección de Contacto" href="#contacto">Contacto</a></li>
+</ul>
+</nav>
+
+<section class="hero-section">
+<div class="hero-content">    
+<h1 class="hero-title">Perfumería Artesanal: Colección de Lujo Francesca&nbsp;Olivia</h1>
+<p class="hero-subtitle">Perfumes de ambiente, textiles y difusores que transforman cada rincón en una experiencia sensorial</p>
+<div class="decorative-line"></div>
+<p class="hero-tagline">Francesca Olivia</p>
+<p class="hero-description">Esencia que inspira</p>
+</div>
+</section>
+<main class="main-content">
+<!-- Galería de Productos -->
+<section class="section scroll-reveal">
+<h2 class="section-title">Calidad Artesanal</h2>
+<div class="content-box">
+<p style="text-align: center; color: var(--text-light); max-width: 600px; margin: 0 auto 40px;">
+          Cada perfume es elaborado artesanalmente con ingredientes de primera calidad. 
+          Descubrí la variedad de aromas únicos que transformarán tu hogar.
+        </p>
+</div>
+<div class="galeria-interactiva">
+<div class="imagen-principal">
+<img alt="Perfumes artesanales Francesca Olivia - Calidad premium" id="imagenMostrada" src="imagenes/perfume1.jpg"/>
+</div>
+<div class="galeria-miniaturas">
+<div class="miniatura-item activa">
+<img alt="Vista 1 de perfumes" onclick="cambiarImagen(this.src, this.alt)" src="imagenes/perfume1.jpg"/>
+</div>
+<div class="miniatura-item">
+<img alt="Vista 2 de perfumes" onclick="cambiarImagen(this.src, this.alt)" src="imagenes/perfume2.jpg"/>
+</div>
+<div class="miniatura-item">
+<img alt="Vista 3 de perfumes" onclick="cambiarImagen(this.src, this.alt)" src="imagenes/perfume3.jpg"/>
+</div>
+<div class="miniatura-item">
+<img alt="Vista 4 de perfumes" onclick="cambiarImagen(this.src, this.alt)" src="imagenes/perfume4.jpg"/>
+</div>
+<div class="miniatura-item">
+<img alt="Vista 5 de perfumes" onclick="cambiarImagen(this.src, this.alt)" src="imagenes/perfume5.jpg"/>
+</div>
+<div class="miniatura-item">
+<img alt="Difusor Premium - Vainilla Azúcar" onclick="cambiarImagen(this.src, this.alt)" src="imagenes/difusor-premium.jpg"/>
+</div>
+<div class="miniatura-item">
+<img alt="Jabón Líquido Ariel" onclick="cambiarImagen(this.src, this.alt)" src="imagenes/jabon-ariel.jpg"/>
+</div>
+</div>
+</div>
+</section>
+<section id="fragancias" class="section scroll-reveal">
+  <h2 class="section-title">Nuestras Fragancias</h2>
+<div class="fragancias-grid">
+<div class="fragancia-category">
+<h3>🍎 Frutales</h3>
+<div class="fragancia-list">
+<span class="fragancia-item">Manzana</span>
+<span class="fragancia-item">Bubaloo</span>
+<span class="fragancia-item">Melón</span>
+<span class="fragancia-item">Pasión frutal</span>
+<span class="fragancia-item">Casino</span>
+<span class="fragancia-item">Papaya</span>
+<span class="fragancia-item">Sandía y pepino</span>
+<span class="fragancia-item">Frutos del bosque</span>
+<span class="fragancia-item">Frutilla</span>
+<span class="fragancia-item">Uva</span>
+<span class="fragancia-item">Manzana verde</span>
+<span class="fragancia-item">Frambuesa</span>
+<span class="fragancia-item">Durazno</span>
+<span class="fragancia-item">Cereza</span>
+<span class="fragancia-item">Kiwi</span>
+<span class="fragancia-item">Sandia</span>
+<span class="fragancia-item">Kosiuko</span>
+<span class="fragancia-item">New grape</span>
+<span class="fragancia-item">Ananá</span>
+<span class="fragancia-item">Banana</span>
+<span class="fragancia-item">Mix berry</span>
+<span class="fragancia-item">Maracuyá</span>
+<span class="fragancia-item">Pepino y melon</span>
+<span class="fragancia-item">Fresas</span>
+<span class="fragancia-item">Ciruelas</span>
+<span class="fragancia-item">Chicle</span>
+<span class="fragancia-item">Frutos rojos</span>
+<span class="fragancia-item">Mora</span>
+<span class="fragancia-item">Cherry</span>
+<span class="fragancia-item">Mango</span>
+</div>
+</div>
+<div class="fragancia-category">
+<h3>🍊 Cítricas</h3>
+<div class="fragancia-list">
+<span class="fragancia-item recomendados">Citrus</span>
+<span class="fragancia-item recomendados">Verbena</span>
+<span class="fragancia-item recomendados">Lemongrass</span>
+<span class="fragancia-item">Té verde y mandarina</span>
+<span class="fragancia-item">Limón verde</span>
+<span class="fragancia-item">Té verde y limón</span>
+<span class="fragancia-item">Pomelo</span>
+<span class="fragancia-item">Limón</span>
+<span class="fragancia-item">Bergamota</span>
+<span class="fragancia-item">Orange</span>
+<span class="fragancia-item">Mandarina</span>
+<span class="fragancia-item">Naranja</span>
+<span class="fragancia-item">Naranja-mandarina</span>
+<span class="fragancia-item">Caramelo de limón</span>
+<span class="fragancia-item">Naranja y maracuyá</span>
+<span class="fragancia-item">Limón especiado</span>
+</div>
+</div>
+<div class="fragancia-category">
+<h3>🌸 Florales</h3>
+<div class="fragancia-list">
+<span class="fragancia-item recomendados">Jazmín</span>
+<span class="fragancia-item recomendados">Flores blancas</span>
+<span class="fragancia-item recomendados">Puma</span>
+<span class="fragancia-item recomendados">Nardo</span>
+<span class="fragancia-item">Armonía</span>
+<span class="fragancia-item">Mil flores</span>
+<span class="fragancia-item">Flores de primavera</span>
+<span class="fragancia-item">Rosa</span>
+<span class="fragancia-item">Gardenia</span>
+<span class="fragancia-item">Reina de la noche</span>
+<span class="fragancia-item">Lavanda</span>
+<span class="fragancia-item">Fresias</span>
+<span class="fragancia-item">Floral</span>
+<span class="fragancia-item">Tilo</span>
+<span class="fragancia-item">Té verde</span>
+<span class="fragancia-item">Loto</span>
+<span class="fragancia-item">Manzanilla</span>
+<span class="fragancia-item">Violeta</span>
+<span class="fragancia-item">Azahar</span>
+<span class="fragancia-item">Orquidea</span>
+<span class="fragancia-item">Armonía dulce</span>
+</div>
+</div>
+<div class="fragancia-category">
+<h3>🍰 Gourmet</h3>
+<div class="fragancia-list">
+<span class="fragancia-item">Coco rallado</span>
+<span class="fragancia-item">Chocolate y avellanas</span>
+<span class="fragancia-item">Almendras</span>
+<span class="fragancia-item">Vainilla silk</span>
+<span class="fragancia-item">Vainilla</span>
+<span class="fragancia-item">Chocolate blanco</span>
+<span class="fragancia-item">Chocolate blanco y coco</span>
+<span class="fragancia-item">Vainilla y canela</span>
+<span class="fragancia-item">Rocio de miel</span>
+<span class="fragancia-item">Chocolate</span>
+<span class="fragancia-item">Miel</span>
+<span class="fragancia-item">Cookies choc</span>
+<span class="fragancia-item">Coco</span>
+<span class="fragancia-item">Canela</span>
+<span class="fragancia-item">Capuchino</span>
+<span class="fragancia-item">Vainilla y chocolate</span>
+<span class="fragancia-item">Cola</span>
+<span class="fragancia-item">Coco dulce</span>
+<span class="fragancia-item">Café</span>
+<span class="fragancia-item">Marshmallow</span>
+</div>
+</div>
+<div class="fragancia-category">
+<h3>🌿 SPA</h3>
+<div class="fragancia-list">
+<span class="fragancia-item">Menta eucaliptos</span>
+<span class="fragancia-item">Bamboo</span>
+<span class="fragancia-item">Té verde y bergamota</span>
+<span class="fragancia-item">Eucaliptos</span>
+<span class="fragancia-item">Romero</span>
+<span class="fragancia-item">Ylang</span>
+<span class="fragancia-item">Spa frutas con romero</span>
+<span class="fragancia-item">Heno</span>
+<span class="fragancia-item">Benjui</span>
+<span class="fragancia-item">Limón y bamboo</span>
+<span class="fragancia-item">Lavanda, manzanilla y limón</span>
+<span class="fragancia-item">Pimienta</span>
+<span class="fragancia-item">Jengibre</span>
+<span class="fragancia-item">Té verde y pepino</span>
+</div>
+</div>
+<div class="fragancia-category">
+<h3>👶 Infantiles</h3>
+<div class="fragancia-list">
+<span class="fragancia-item recomendados">Fòs baby</span>
+<span class="fragancia-item recomendados">Cheeky</span>
+<span class="fragancia-item recomendados">Baby J</span>
+<span class="fragancia-item">Mamá bebé</span>
+<span class="fragancia-item">Baby Danields</span>
+<span class="fragancia-item">Critic baby</span>
+<span class="fragancia-item">Blue</span>
+<span class="fragancia-item">Baby blue</span>
+<span class="fragancia-item">Mate baby</span>
+</div>
+</div>
+<div class="fragancia-category">
+<h3>🏛️ Místicas</h3>
+<div class="fragancia-list">
+<span class="fragancia-item">Sai-Ba (Nag champa)</span>
+<span class="fragancia-item">Vainilla y sándalo</span>
+<span class="fragancia-item">Maderas</span>
+<span class="fragancia-item">Incienso</span>
+<span class="fragancia-item">Oriental</span>
+<span class="fragancia-item">Almizcle</span>
+<span class="fragancia-item">Neroli</span>
+<span class="fragancia-item">Cedro</span>
+<span class="fragancia-item">Mirra</span>
+<span class="fragancia-item">Madera y sándalo</span>
+<span class="fragancia-item">Patchouli</span>
+<span class="fragancia-item">Madera y patchouli</span>
+<span class="fragancia-item">Sándalo</span>
+<span class="fragancia-item">Pino</span>
+</div>
+</div>
+<div class="fragancia-category">
+<h3>🌟 Clásicas</h3>
+<div class="fragancia-list">
+<span class="fragancia-item">Coni</span>
+<span class="fragancia-item">Fragancia 21</span>
+<span class="fragancia-item">Vivex</span>
+<span class="fragancia-item">Confort</span>
+<span class="fragancia-item">Suavidad de algodón</span>
+<span class="fragancia-item">Crombie</span>
+<span class="fragancia-item">Dom</span>
+<span class="fragancia-item">Drakar</span>
+<span class="fragancia-item">Paris</span>
+<span class="fragancia-item">Cotton</span>
+<span class="fragancia-item">Clean house</span>
+<span class="fragancia-item">Marina</span>
+<span class="fragancia-item">Lisoform</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section scroll-reveal">
+<h2 class="section-title">Aromas con propósito</h2>
+<div class="content-box">
+<p><strong>🍎 Frutales:</strong> transmiten alegría, vitalidad y frescura. Ideales para levantar el ánimo o dar una sensación de juventud al ambiente.</p>
+<p><strong>🌸 Florales:</strong> evocan delicadeza, armonía y romanticismo. Son perfectos para dormitorios, baños o espacios donde buscás calma.</p>
+<p><strong>🍰 Gourmet:</strong> brindan confort, dulzura y una sensación acogedora. Vainilla, coco o chocolate ayudan a crear un ambiente cálido y hogareño.</p>
+<p><strong>🍊 Cítricas:</strong> aportan energía, claridad mental y limpieza. Recomendadas para zonas de trabajo o cocinas.</p>
+<p><strong>🌿 SPA:</strong> combinan notas verdes y herbales que invitan a la relajación profunda. Son excelentes para momentos de autocuidado o meditación.</p>
+<p><strong>👶 Infantiles:</strong> suaves, tiernas y limpias. Ideales para habitaciones de bebés o personas sensibles a los aromas fuertes.</p>
+<p><strong>🏛️ Místicas:</strong> aromas intensos y espirituales como el sándalo o el incienso. Perfectos para introspección, descanso o ambientar espacios especiales.</p>
+<p><strong>🌟 Clásicas:</strong> frescura atemporal, limpieza y elegancia. Son fragancias versátiles que combinan con cualquier ambiente del hogar.</p>
+</div>
+</section>
+<!-- Textiles y Home -->
+<section id="textiles" class="section scroll-reveal">
+  <h2 class="section-title">Nuestro Catálogo</h2>
+<div class="textiles-table">
+<!-- La tabla se generará dinámicamente con JavaScript -->
+<table id="product-table">
+<thead>
+<tr>
+<th>Producto</th>
+<th>Presentación</th>
+<th>Precio</th>
+<th></th> <!-- Columna para el botón de agregar -->
+</tr>
+</thead>
+<tbody>
+<!-- Las filas de productos se insertarán aquí -->
+</tbody>
+</table>
+</div>
+</section>
+<section class="section scroll-reveal">
+<h2 class="section-title">Consejos para aromatizar tu hogar</h2>
+<div class="content-box">
+<p><strong>🌿 ¿Dónde colocar los difusores?</strong><br/>
+        Ubicalos en entradas, baños o rincones con poco flujo de aire para que el aroma se perciba de forma constante.</p>
+<hr/>
+<p><strong>🍋 ¿Qué fragancia elegir?</strong><br/>
+        Para un ambiente relajante, optá por lavanda o jazmín. Si buscás energía y frescura, elegí cítricos como limón, verbena o lemongrass.</p>
+<hr/>
+<p><strong>🧺 ¿Cómo aplicar perfumes textiles?</strong><br/>
+        Aplicá a unos 30 cm de distancia sobre sábanas, cortinas o ropa. Elegí aromas suaves para dormitorios y más dulces o intensos para salas comunes.</p>
+<hr/>
+<p><strong>🌸 Consejo extra:</strong><br/>
+        Combiná un difusor con un perfume textil de la misma familia olfativa para intensificar el efecto sin saturar el ambiente.</p>
+</div>
+</section>
+<section class="section scroll-reveal">
+<h2 class="section-title">Guía rápida para elegir tu fragancia</h2>
+<div class="guide-table">
+<table>
+<thead>
+<tr>
+<th>Tipo de fragancia</th>
+<th>Ideal para</th>
+<th>Sensación</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Lavanda, Jazmín</td><td>Dormitorio</td><td>Relajación, descanso</td></tr>
+<tr><td>Verbena, Lemongrass</td><td>Cocina, escritorio</td><td>Frescura, energía</td></tr>
+<tr><td>Vainilla, Canela</td><td>Living</td><td>Calidez, dulzura</td></tr>
+<tr><td>Rosa, Gardenia</td><td>Baño</td><td>Elegancia, delicadeza</td></tr>
+<tr><td>Sándalo, Cedro</td><td>Entrada</td><td>Sensación de hogar</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="faq" class="section scroll-reveal">
+  <h2 class="section-title">Preguntas Frecuentes</h2>
+<div class="content-box">
+<p><strong>¿Los perfumes textiles manchan la ropa?</strong><br/>
+        No. Están formulados con una concentración adecuada para perfumar sin dejar residuos, pero se recomienda probar primero en una parte pequeña.</p>
+<hr/>
+<p><strong>¿Qué duración tienen los difusores?</strong><br/>
+        Entre 30 y 45 días, dependiendo de la ventilación del ambiente y la cantidad de varillas utilizadas.</p>
+<hr/>
+<p><strong>¿Puedo mezclar aromas?</strong><br/>
+        Sí, pero es ideal que pertenezcan a la misma familia olfativa (por ejemplo, florales entre sí) para no saturar el ambiente.</p>
+<hr/>
+<p><strong>¿Cómo hago un pedido?</strong><br/>
+        Podés agregar productos al carrito desde nuestro catálogo, seleccionando la fragancia que desees. Luego, presiona "Hacer un Pedido" para enviarnos un correo con tu selección.</p>
+</div>
+</section>
+<section class="section scroll-reveal">
+<h2 class="section-title">Nuestra esencia</h2>
+<div class="content-box">
+<p>Francesca Olivia nació del deseo de transformar espacios cotidianos en experiencias sensoriales únicas. Creemos que un buen aroma no solo decora: despierta emociones, crea recuerdos y mejora el bienestar.</p>
+<p>Inspirados en la delicadeza, el confort y la armonía, cada fragancia es seleccionada cuidadosamente para que puedas hacer de tu hogar un lugar especial.</p>
+<p>Queremos que cada perfume sea un reflejo de tu personalidad y tu estilo.</p>
+</div>
+</section>
+<section class="section scroll-reveal">
+<h2 class="section-title">Notas para inspirarte</h2>
+<div class="cards-grid">
+<div class="card">
+<h3>🌤 Fragancias para el verano</h3>
+<p>Elegí aromas frescos como verbena, citrus o pepino para combatir el calor y refrescar tus espacios.</p>
+</div>
+<div class="card">
+<h3>🧼 Textiles que huelen a nuevo</h3>
+<p>Aplicá perfume textil en toallas, cortinas y sábanas para dar una sensación de limpieza duradera.</p>
+</div>
+<div class="card">
+<h3>🕯 Cómo usar varillas de difusor</h3>
+<p>Dales la vuelta cada 4-5 días para renovar el aroma y ajustá la intensidad según cuántas uses.</p>
+</div>
+</div>
+</section>
+<!-- Sección de Contacto -->
+<section id="contacto" class="section scroll-reveal">
+  <div class="contact-section">
+<h3>¿Tenés alguna consulta?</h3>
+<p>Contactanos por email para pedidos personalizados, consultas sobre fragancias o cualquier información que necesites.</p>
+<a aria-label="Enviar una consulta por email" class="email-btn large" href="mailto:esequielbelengimenez@gmail.com?subject=Consulta%20sobre%20productos%20Francesca%20Olivia">
+          📧 Enviar Consulta por Email
+        </a>
+</div>
+</section>
+</main>
+<footer>
+    © 2025 Francesca Olivia – Fragancias que inspiran
+  </footer>
+    
+<!-- ================================== -->
+<!-- ELEMENTOS DEL CARRITO Y MODAL      -->
+<!-- ================================== -->
+<button class="cart-toggle" aria-label="Abrir carrito" onclick="toggleCart()">
+  <i class="fas fa-shopping-bag"></i>
+  <span class="cart-count">0</span>
+</button>
+
+<div class="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-modal">
+    <div class="cart-header">
+        <h2><i class="fas fa-shopping-bag"></i> Mi Pedido</h2>
+        <button class="close-cart" onclick="toggleCart()" aria-label="Cerrar carrito">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <div class="cart-empty">
+            <i class="fas fa-perfume"></i>
+            <p>Tu carrito está vacío</p>
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span class="price" id="cartTotal">$0</span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()" id="checkoutBtn" disabled>
+            <i class="fas fa-envelope"></i>
+            Hacer un Pedido
+        </button>
+    </div>
+</div>
+
+<!-- Modal de selección de fragancia -->
+<div class="cart-overlay" id="fragrance-overlay"></div>
+<div class="fragrance-modal" id="fragrance-modal">
+    <h3 id="fragrance-modal-title">Selecciona una Fragancia</h3>
+    <select id="fragrance-select"></select>
+    <div class="fragrance-modal-actions">
+        <button class="modal-btn cancel" id="cancel-fragrance">Cancelar</button>
+        <button class="modal-btn confirm" id="confirm-fragrance">Confirmar</button>
+    </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+
+<script>
+    function cambiarImagen(nuevaSrc, nuevoAlt) {
+      const imagenMostrada = document.getElementById('imagenMostrada');
+      imagenMostrada.style.opacity = '0';
+      
+      setTimeout(() => {
+        imagenMostrada.src = nuevaSrc;
+        imagenMostrada.alt = nuevoAlt;
+        imagenMostrada.style.opacity = '1';
+      }, 400);
+
+      const miniaturas = document.querySelectorAll('.miniatura-item');
+      miniaturas.forEach(miniatura => {
+        miniatura.classList.remove('activa');
+        if (miniatura.querySelector('img').src === nuevaSrc) {
+          miniatura.classList.add('activa');
+        }
+      });
+    }
+
+    // Scroll reveal animation
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.scroll-reveal');
+      
+      reveals.forEach(reveal => {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveal.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          reveal.classList.add('revealed');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    document.addEventListener('DOMContentLoaded', revealOnScroll);
+
+    /* ========================================= */
+    /* SCRIPT DEL CARRITO DE COMPRAS             */
+    /* ========================================= */
+
+    // 1. DATOS DE PRODUCTOS
+    const products = [
+        { id: 1, name: 'Perfuminas Textiles 2%', presentation: 'Bidón 5lts', price: 25500, requiresFragrance: true },
+        { id: 2, name: 'Home Spray', presentation: '250cc (unidad)', price: 3000, requiresFragrance: true },
+        { id: 3, name: 'Home Spray Gatillo', presentation: '250cc (unidad)', price: 3300, requiresFragrance: true },
+        { id: 4, name: 'Difusores Clasicos', presentation: '125cc (unidad)', price: 3400, requiresFragrance: true },
+        { id: 5, name: 'Repuesto Difusor 15%', presentation: 'Por litro', price: 16500, requiresFragrance: true },
+        { id: 6, name: 'Repuesto Difusor 15%', presentation: '5lts', price: 65500, requiresFragrance: true },
+        { id: 7, name: 'Deo Desinfectante', presentation: '125cc (rinde 5lts)', price: 4500, requiresFragrance: true },
+        { id: 8, name: 'Jabon Liquido Ariel', presentation: 'Por litro', price: 3000, requiresFragrance: false },
+        { id: 9, name: 'Jabón Líquido', presentation: 'Bidón 5lts', price: 11500, requiresFragrance: false },
+        { id: 10, name: 'Suavizante Confort/Vivex', presentation: 'Bidón 5lts', price: 11500, requiresFragrance: false },
+        { id: 11, name: 'Body Splash Imitacion 8%', presentation: '125cc', price: 4700, requiresFragrance: true },
+        { id: 12, name: 'Body Splash Imitacion 8%', presentation: 'Por litro', price: 15700, requiresFragrance: true }
+    ];
+
+    // 2. ESTADO DEL CARRITO Y MODAL
+    let cart = [];
+    let availableFragrances = [];
+    let currentProductToAdd = null;
+
+    // 3. INICIALIZACIÓN
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProductTable();
+        loadFragrances();
+        updateCart();
+        setupModalListeners();
+    });
+
+    // 4. RENDERIZAR TABLA DE PRODUCTOS
+    function renderProductTable() {
+        const tableBody = document.querySelector('#product-table tbody');
+        if (!tableBody) return;
+        tableBody.innerHTML = products.map(product => `
+            <tr>
+                <td><strong>${product.name}</strong></td>
+                <td>${product.presentation}</td>
+                <td class="precio">$${product.price.toLocaleString('es-AR')}</td>
+                <td>
+                    <button class="add-to-cart-btn" onclick="handleAddToCartClick(${product.id})">
+                        <i class="fas fa-plus"></i> Agregar
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // 5. LÓGICA DE SELECCIÓN DE FRAGANCIA Y AÑADIR AL CARRITO
+    function loadFragrances() {
+        const fragranceElements = document.querySelectorAll('.fragancia-item');
+        availableFragrances = Array.from(fragranceElements).map(el => el.textContent.trim());
+    }
+    
+    function handleAddToCartClick(productId) {
+        const product = products.find(p => p.id === productId);
+        if (product.requiresFragrance) {
+            openFragranceModal(productId);
+        } else {
+            addItemToCart(product);
+        }
+    }
+
+    function openFragranceModal(productId) {
+        currentProductToAdd = products.find(p => p.id === productId);
+        const modal = document.getElementById('fragrance-modal');
+        const overlay = document.getElementById('fragrance-overlay');
+        const select = document.getElementById('fragrance-select');
+        const title = document.getElementById('fragrance-modal-title');
+
+        title.textContent = `Elige fragancia para: ${currentProductToAdd.name}`;
+        select.innerHTML = availableFragrances.map(f => `<option value="${f}">${f}</option>`).join('');
+        
+        modal.classList.add('active');
+        overlay.classList.add('active');
+    }
+
+    function closeFragranceModal() {
+        document.getElementById('fragrance-modal').classList.remove('active');
+        document.getElementById('fragrance-overlay').classList.remove('active');
+        currentProductToAdd = null;
+    }
+
+    function setupModalListeners() {
+        document.getElementById('confirm-fragrance').addEventListener('click', () => {
+            const selectedFragrance = document.getElementById('fragrance-select').value;
+            const productWithFragrance = {
+                ...currentProductToAdd,
+                displayName: `${currentProductToAdd.name} (Fragancia: ${selectedFragrance})`
+            };
+            addItemToCart(productWithFragrance);
+            closeFragranceModal();
+        });
+
+        document.getElementById('cancel-fragrance').addEventListener('click', closeFragranceModal);
+        document.getElementById('fragrance-overlay').addEventListener('click', closeFragranceModal);
+    }
+    
+    function addItemToCart(product) {
+        // Usamos displayName para diferenciar productos con distintas fragancias
+        const displayName = product.displayName || product.name;
+        const existingItem = cart.find(i => i.displayName === displayName);
+
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cart.push({ ...product, displayName, quantity: 1, cartId: Date.now() });
+        }
+        updateCart();
+        showNotification(`${displayName} agregado al carrito`);
+    }
+
+    function removeFromCart(cartId) {
+        const removedItem = cart.find(item => item.cartId === cartId);
+        cart = cart.filter(item => item.cartId !== cartId);
+        updateCart();
+        if (removedItem) {
+            showNotification(`${removedItem.displayName} eliminado`);
+        }
+    }
+
+    function updateQuantity(cartId, change) {
+        const item = cart.find(i => i.cartId === cartId);
+        if (item) {
+            item.quantity += change;
+            if (item.quantity <= 0) {
+                removeFromCart(cartId);
+            } else {
+                updateCart();
+            }
+        }
+    }
+    
+    // 6. ACTUALIZAR VISTA DEL CARRITO
+    function updateCart() {
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartCountEl = document.querySelector('.cart-count');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountEl.textContent = totalItems;
+
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotalEl.textContent = `$${total.toLocaleString('es-AR')}`;
+        
+        checkoutBtn.disabled = cart.length === 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = `
+                <div class="cart-empty">
+                    <i class="fas fa-perfume"></i>
+                    <p>Tu carrito está vacío</p>
+                </div>`;
+        } else {
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div class="cart-item" data-cart-id="${item.cartId}">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.displayName}</div>
+                        <div class="cart-item-price">$${(item.price * item.quantity).toLocaleString('es-AR')}</div>
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn" onclick="updateQuantity(${item.cartId}, -1)">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${item.cartId}, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(${item.cartId})" aria-label="Eliminar producto">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+    }
+    
+    // 7. TOGGLE CART VISIBILITY
+    function toggleCart() {
+        const cartModal = document.querySelector('.cart-modal');
+        const cartOverlay = document.querySelector('.cart-overlay');
+        cartModal.classList.toggle('active');
+        cartOverlay.classList.toggle('active');
+    }
+    
+    // 8. NOTIFICACIONES
+    function showNotification(message) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 3000);
+    }
+
+    // 9. CHECKOUT (GENERAR EMAIL)
+    function checkout() {
+        if (cart.length === 0) return;
+
+        const email = "esequielbelengimenez@gmail.com";
+        const subject = "Nuevo Pedido de Productos - Francesca Olivia";
+        
+        let body = "Hola, me gustaría hacer el siguiente pedido:\n\n";
+        
+        cart.forEach(item => {
+            body += `${item.quantity}x ${item.displayName} - Subtotal: $${(item.price * item.quantity).toLocaleString('es-AR')}\n`;
+        });
+
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        body += `\nTotal a Pagar: $${total.toLocaleString('es-AR')}`;
+        body += "\n\nPor favor, confirmame los pasos a seguir para el pago y envío. ¡Gracias!";
+        
+        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        window.location.href = mailtoLink;
+
+        showNotification('Abriendo tu cliente de email...');
+        
+        setTimeout(() => {
+            cart = [];
+            updateCart();
+            toggleCart();
+        }, 1500);
+    }
+</script>
+
+
+<!-- ==================================================== -->
+<!-- INICIO DEL WIDGET DEL CHATBOT - RESTAURADO -->
+<!-- ==================================================== -->
+<style>
+    /* Reset específico para el chatbot */
+    #chatbot-container, #chatbot-container * {
+      font-family: 'Inter', sans-serif !important;
+      box-sizing: border-box !important;
+      margin: 0;
+      padding: 0;
+      line-height: normal;
+    }
+    
+    #chatbot-toggle {
+      position: fixed !important; bottom: 100px !important; right: 20px !important; /* Elevado para no superponerse con el carrito */
+      width: 65px !important; height: 65px !important; border-radius: 50% !important;
+      background: linear-gradient(135deg, #2C3E50, #34495E) !important;
+      color: var(--secondary-color) !important;
+      border: none !important; cursor: pointer !important;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      font-size: 32px !important; transition: all 0.3s ease !important;
+      z-index: 9997 !important; line-height: 1 !important;
+    }
+    
+    #chatbot-toggle:hover { transform: scale(1.1) rotate(10deg) !important; }
+        
+    #chatbot-window {
+      display: none; position: fixed !important; bottom: 180px !important; right: 20px !important; /* Elevado */
+      width: 400px !important; height: 600px !important; background: #f9f7f2 !important;
+      border-radius: 20px !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important;
+      overflow: hidden !important; flex-direction: column !important;
+      transform-origin: bottom right !important;
+      animation: openChat 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 9996 !important;
+    }
+    
+    @keyframes openChat {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    
+    #chatbot-header {
+      background: linear-gradient(135deg, #2C3E50, #34495E) !important; color: white !important;
+      padding: 20px !important; display: flex !important; justify-content: space-between !important;
+      align-items: center !important; border-bottom: 4px solid #D4AF37 !important;
+      flex-shrink: 0 !important;
+    }
+    
+    #chatbot-header-content h3 {
+      margin: 0 !important; font-family: 'Playfair Display', serif !important;
+      font-size: 1.4em !important; line-height: 1.2 !important; font-weight: 700 !important;
+    }
+    
+    #chatbot-header-content p {
+      margin: 5px 0 0 0 !important; font-size: 0.9em !important;
+      opacity: 0.8 !important; line-height: 1.2 !important;
+    }
+    
+    #chatbot-close {
+      background: transparent !important; border: none !important; color: white !important;
+      font-size: 28px !important; cursor: pointer !important; padding: 0 !important;
+      width: 30px !important; height: 30px !important; display: flex !important;
+      align-items: center !important; justify-content: center !important;
+      border-radius: 50% !important; transition: background 0.2s !important;
+      line-height: 1 !important; flex-shrink: 0 !important;
+    }
+    
+    #chatbot-close:hover { background: rgba(255,255,255,0.1) !important; }
+    
+    #chatbot-messages {
+      flex: 1 !important; overflow-y: auto !important; padding: 20px !important;
+      display: flex !important; flex-direction: column !important; gap: 15px !important;
+      scroll-behavior: smooth !important;
+    }
+    
+    .bot-message, .user-message {
+      padding: 14px 20px !important; border-radius: 20px !important;
+      max-width: 85% !important; word-wrap: break-word !important;
+      white-space: pre-wrap !important; line-height: 1.5 !important;
+      animation: slideIn 0.3s ease; font-size: 15px !important;
+    }
+    
+    .message-time {
+      font-size: 0.75em !important; opacity: 0.6 !important;
+      margin-top: 8px !important; display: block !important;
+      text-align: right;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .bot-message {
+      background: white !important; color: #2C3E50 !important;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important;
+      align-self: flex-start !important; border-bottom-left-radius: 5px !important;
+    }
+    
+    .user-message {
+      background: linear-gradient(135deg, #D4AF37, #F4D03F) !important;
+      color: #2C3E50 !important; font-weight: 500 !important;
+      align-self: flex-end !important;
+      box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3) !important;
+      border-bottom-right-radius: 5px !important;
+    }
+        
+    #chatbot-input-area {
+      padding: 15px !important; background: white !important;
+      border-top: 1px solid #e0e0e0 !important; flex-shrink: 0 !important;
+    }
+    
+    #quick-replies {
+        display: flex !important; flex-wrap: wrap !important;
+        gap: 8px !important; margin-bottom: 12px !important;
+    }
+    
+    .quick-reply-btn {
+        background: white !important; border: 2px solid #D4AF37 !important;
+        color: #D4AF37 !important; padding: 8px 14px !important;
+        border-radius: 20px !important; cursor: pointer !important;
+        font-weight: 600 !important; transition: all 0.2s ease !important;
+        font-size: 0.9em !important; line-height: 1.2 !important;
+    }
+    
+    .quick-reply-btn:hover {
+        background: #D4AF37 !important; color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3) !important;
+    }
+    
+    #chatbot-input-wrapper { position: relative !important; display: flex !important; gap: 8px !important; }
+    
+    #chatbot-input {
+      flex: 1 !important; padding: 12px 18px !important;
+      border: 2px solid #ddd !important; border-radius: 25px !important;
+      font-size: 15px !important; outline: none !important;
+      transition: border-color 0.3s !important;
+    }
+    
+    #chatbot-input:focus { border-color: #D4AF37 !important; }
+    
+    #chatbot-send {
+      background: linear-gradient(135deg, #D4AF37, #F4D03F) !important;
+      border: none !important; color: #2C3E50 !important;
+      width: 45px !important; height: 45px !important;
+      border-radius: 50% !important; cursor: pointer !important;
+      display: flex !important; align-items: center !important;
+      justify-content: center !important; font-size: 20px !important;
+      transition: all 0.2s !important;
+    }
+    
+    @media (max-width: 480px) {
+        #chatbot-window {
+            width: 100% !important; height: 100% !important; top: 0 !important;
+            right: 0 !important; bottom: 0 !important; left: 0 !important;
+            border-radius: 0 !important;
+        }
+    }
+</style>
+<div id="chatbot-container">
+  <button id="chatbot-toggle" aria-label="Abrir chat">💬</button>
+  <div id="chatbot-window">
+    <div id="chatbot-header">
+      <div id="chatbot-header-content">
+        <h3>Francesca Olivia</h3>
+        <p>Asistente Virtual</p>
+      </div>
+      <button id="chatbot-close" aria-label="Cerrar chat">×</button>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input-area">
+      <div id="quick-replies"></div>
+      <div id="chatbot-input-wrapper">
+        <input id="chatbot-input" type="text" placeholder="Escribe tu mensaje..." autocomplete="off">
+        <button id="chatbot-send" aria-label="Enviar mensaje">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="chatbot.js"></script> <!-- Asegúrate de tener este archivo en la misma carpeta que tu index.html -->
+<!-- ================================================== -->
+<!-- FIN DEL WIDGET DEL CHATBOT -->
+<!-- ================================================== -->
+
+</body>
+</html>
