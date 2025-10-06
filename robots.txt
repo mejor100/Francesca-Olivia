@@ -1,0 +1,17 @@
+# robots.txt para francesca-olivia.pages.dev
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://francesca-olivia.pages.dev/sitemap.xml
+
+# Bloquear archivos comunes que no deberían indexarse (opcional)
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /api/
+
+# Permitir rastreo de CSS y JS para renderizado correcto
+Allow: /*.css$
+Allow: /*.js$
