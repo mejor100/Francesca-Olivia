@@ -586,25 +586,68 @@ _noEntendido() {
     }, 100);
   }
   
-  function formatearHora() {
-    return new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+function formatearHora() {
+  return new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+}
+
+function agregarMensaje(texto, tipo) {
+  if (!texto || texto.trim() === '') return;
+
+  const messageEl = document.createElement('div');
+  messageEl.className = tipo === 'user' ? 'user-message' : 'bot-message';
+
+  // Div principal del mensaje
+  const textoDiv = document.createElement('div');
+
+  // Manejo de negritas **texto**
+  const fragment = document.createDocumentFragment();
+  let lastIndex = 0;
+  const regex = /\*\*(.*?)\*\*/g;
+  let match;
+
+  while ((match = regex.exec(texto)) !== null) {
+    // Texto normal antes de **
+    if (match.index > lastIndex) {
+      fragment.appendChild(document.createTextNode(texto.substring(lastIndex, match.index)));
+    }
+    // Texto en negrita
+    const strong = document.createElement('strong');
+    strong.textContent = match[1]; // seguro contra XSS
+    fragment.appendChild(strong);
+    lastIndex = match.index + match[0].length;
   }
-  
-  function agregarMensaje(texto, tipo) {
-    if (!texto || texto.trim() === '') return;
-    
-    const messageEl = document.createElement('div');
-    messageEl.className = tipo === 'user' ? 'user-message' : 'bot-message';
-    
-    const textoHTML = texto
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\n/g, '<br>');
-    
-    messageEl.innerHTML = `<div>${textoHTML}</div><div class="message-time">${formatearHora()}</div>`;
-    
-    elements.messages.appendChild(messageEl);
-    scrollToBottom();
+  // Texto restante
+  if (lastIndex < texto.length) {
+    fragment.appendChild(document.createTextNode(texto.substring(lastIndex)));
   }
+
+  // Reemplazar saltos de línea por <br>
+  const nodes = [];
+  fragment.childNodes.forEach(node => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      node.textContent.split('\n').forEach((line, i, arr) => {
+        nodes.push(document.createTextNode(line));
+        if (i < arr.length - 1) nodes.push(document.createElement('br'));
+      });
+    } else {
+      nodes.push(node);
+    }
+  });
+
+  nodes.forEach(n => textoDiv.appendChild(n));
+
+  // Hora del mensaje
+  const timeDiv = document.createElement('div');
+  timeDiv.className = 'message-time';
+  timeDiv.textContent = formatearHora();
+
+  messageEl.appendChild(textoDiv);
+  messageEl.appendChild(timeDiv);
+
+  elements.messages.appendChild(messageEl);
+  scrollToBottom();
+}
+
   
   function mostrarIndicadorEscritura() {
     const indicator = document.createElement('div');
@@ -700,11 +743,19 @@ _noEntendido() {
         agregarMensaje(data.respuesta, 'bot');
         if (data.quick_replies) mostrarQuickReplies(data.quick_replies);
         
-        if (data.accion_mailto) {
-            setTimeout(() => { 
-                window.location.href = data.accion_mailto; 
-            }, 500);
+            if (data.accion_mailto) {
+        const url = data.accion_mailto.trim();
+
+        // Validar que sea un mailto
+        if (url.startsWith('mailto:')) {
+          setTimeout(() => { 
+            window.location.href = url;
+          }, 500);
+        } else {
+          console.warn('URL no permitida en accion_mailto:', url);
         }
+      }
+
         
       } else {
         throw new Error('Respuesta vacía o inválida del chatbot');
