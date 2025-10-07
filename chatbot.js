@@ -9,16 +9,12 @@ const CONFIG = {
   MAX_INTENTOS_FALLIDOS: 2
 };
 
-// ... (Aquí va TODO el código del "cerebro" que me pasaste al principio, sin cambiar nada)
-// ... (desde ESTADOS hasta el final de la clase ChatBot)
-
-// AÑADIMOS UN NUEVO ESTADO
 const ESTADOS = {
   ESPERANDO_CONFIRMACION: 'esperando_confirmacion',
   ESPERANDO_FRAGANCIA: 'esperando_fragancia',
   ESPERANDO_AMBIENTE: 'esperando_tipo_ayuda',
   ESPERANDO_FRAGANCIA_AMBIENTE: 'esperando_fragancia_ambiente',
-  ESPERANDO_PRODUCTO: 'esperando_producto' // <-- NUEVO
+  ESPERANDO_PRODUCTO: 'esperando_producto'
 };
 
 const EMOJIS = {
@@ -247,7 +243,7 @@ class ChatBot {
       estado: contexto.estado, 
       producto_pendiente: contexto.producto_pendiente, 
       producto_seleccionado: contexto.producto_seleccionado,
-      fragancia_seleccionada: contexto.fragancia_seleccionada, // <-- NUEVO
+      fragancia_seleccionada: contexto.fragancia_seleccionada,
       intentos_fallidos: contexto.intentos_fallidos || 0
     };
     this.buscadorProd = new Buscador(PRODUCTOS, 'producto');
@@ -351,8 +347,8 @@ class ChatBot {
     if (errorRespuesta) return errorRespuesta;
     return { respuesta: 'Elegí una de las fragancias recomendadas.', quick_replies: ['Ver fragancias', 'Otro ambiente', 'Cancelar'] }; 
   }
-  // AÑADE ESTA NUEVA FUNCIÓN DENTRO DE LA CLASE ChatBot
-_estado_esperando_producto() {
+  
+  _estado_esperando_producto() {
     const producto = this.buscadorProd.buscar(this.mensaje);
     
     if (producto) {
@@ -387,9 +383,7 @@ _estado_esperando_producto() {
         respuesta: '🤔 No encontré ese producto. ¿En cuál querés la fragancia?',
         quick_replies: ['Difusor', 'Home Spray', 'Perfuminas', 'Cancelar']
     };
-}
-
-
+  }
 
   _procesarIntencion(intencion) {
     const handlers = {
@@ -420,35 +414,30 @@ _estado_esperando_producto() {
   }
   _pedirAyuda() { this.contexto.estado = ESTADOS.ESPERANDO_AMBIENTE; this.contexto.intentos_fallidos = 0; return { respuesta: '🎯 ¿Para qué ambiente lo necesitás?', quick_replies: ['Dormitorio', 'Baño', 'Living', 'Cocina', 'Para bebe'] }; }
   _seguirComprando() { this._resetearEstado(); return { respuesta: '¿Qué más te gustaría?', quick_replies: ['Ver productos', 'Ver fragancias', 'Ayudame a elegir'] }; }
-  // REEMPLAZA ESTA FUNCIÓN COMPLETA
-_agregarProducto() { 
+  
+  _agregarProducto() { 
     const producto = this.buscadorProd.buscar(this.mensaje); 
     const fragancia = this.buscadorFrag.buscar(this.mensaje); 
     
-    // CASO 1: El usuario mencionó un producto
     if (producto) { 
         if (producto.requiereFragancia) {
-            // Si también mencionó una fragancia válida, va a confirmación
             if (fragancia) { 
                 this.contexto.estado = ESTADOS.ESPERANDO_CONFIRMACION; 
                 this.contexto.producto_pendiente = { productoId: producto.id, fraganciaId: fragancia.id, cantidad: 1 }; 
                 this.contexto.intentos_fallidos = 0;
                 return { respuesta: `📦 **${producto.nombre}**\n🌸 **${fragancia.nombre}**\n\n💰 $${producto.precio.toLocaleString()}\n\n¿Lo agregamos?`, quick_replies: ['Si', 'No'] }; 
             }
-            // Si no mencionó fragancia, se la pedimos
             this.contexto.estado = ESTADOS.ESPERANDO_FRAGANCIA; 
             this.contexto.producto_seleccionado = producto.id; 
             this.contexto.intentos_fallidos = 0;
             return { respuesta: `📦 **${producto.nombre}**\n💰 $${producto.precio.toLocaleString()}\n\n¿En qué fragancia lo querés?`, quick_replies: ['Lavanda', 'Verbena', 'Vainilla', 'Ver fragancias'] }; 
         }
-        // Si el producto no requiere fragancia, va a confirmación
         this.contexto.estado = ESTADOS.ESPERANDO_CONFIRMACION; 
         this.contexto.producto_pendiente = { productoId: producto.id, fraganciaId: null, cantidad: 1 }; 
         this.contexto.intentos_fallidos = 0;
         return { respuesta: `📦 **${producto.nombre}**\n💰 $${producto.precio.toLocaleString()}\n\n¿Lo agregamos?`, quick_replies: ['Si', 'No'] }; 
     }
     
-    // CAMBIO CLAVE: CASO 2 - El usuario SÓLO mencionó una fragancia
     if (fragancia) {
         this.contexto.estado = ESTADOS.ESPERANDO_PRODUCTO;
         this.contexto.fragancia_seleccionada = fragancia.id;
@@ -459,9 +448,9 @@ _agregarProducto() {
         };
     }
     
-    // Si no encontró ni producto ni fragancia
     return this._noEntendido();
-}
+  }
+
   _consultaPrecio() { 
     const producto = this.buscadorProd.buscar(this.mensaje); 
     if (producto) return { respuesta: `💰 **${producto.nombre}**\n\n$${producto.precio.toLocaleString()}\n📝 ${producto.descripcion}`, quick_replies: ['Agregar', 'Ver productos'] }; 
@@ -492,18 +481,15 @@ _agregarProducto() {
     if (this.contexto.carrito.vacio) return { respuesta: '🛒 Carrito vacío.', quick_replies: ['Ver productos'] }; 
     return { respuesta: `✅ **¡LISTO!**\n\n${this.contexto.carrito.obtenerResumen()}\n\n📧 Clic abajo para enviar.`, accion_mailto: this.contexto.carrito.generarEmailPedido() }; 
   }
-  // REEMPLAZA ESTA FUNCIÓN COMPLETA
-_noEntendido() {
-    // CAMBIO CLAVE: Ahora el "no entendido" intenta ser proactivo
+
+  _noEntendido() {
     const producto = this.buscadorProd.buscar(this.mensaje);
     const fragancia = this.buscadorFrag.buscar(this.mensaje);
 
-    // Si encuentra algo, redirige a la lógica de agregar producto
     if (producto || fragancia) {
         return this._agregarProducto();
     }
     
-    // Si realmente no entiende nada, muestra el mensaje por defecto
     const errorRespuesta = this._incrementarIntentos();
     if (errorRespuesta) return errorRespuesta;
     
@@ -511,18 +497,20 @@ _noEntendido() {
         respuesta: '🤔 No entendí. Podés pedirme:\n\n• "Ver productos"\n• "Ayuda para elegir"\n• O escribir el nombre de lo que buscás.',
         quick_replies: ['Ver productos', 'Ver fragancias', 'Ayudame a elegir']
     };
-}
+  }
   
   obtenerRespuesta() {
     try {
       const resultado = this.procesar();
-      return { json: { ...resultado, contexto: {sessionId: this.contexto.sessionId, 
-    carrito: this.contexto.carrito.toJSON(), 
-    estado: this.contexto.estado, 
-    producto_pendiente: this.contexto.producto_pendiente, 
-    producto_seleccionado: this.contexto.producto_seleccionado,
-    fragancia_seleccionada: this.contexto.fragancia_seleccionada, // <-- NUEVO
-    intentos_fallidos: this.contexto.intentos_fallidos } } };
+      return { json: { ...resultado, contexto: {
+        sessionId: this.contexto.sessionId, 
+        carrito: this.contexto.carrito.toJSON(), 
+        estado: this.contexto.estado, 
+        producto_pendiente: this.contexto.producto_pendiente, 
+        producto_seleccionado: this.contexto.producto_seleccionado,
+        fragancia_seleccionada: this.contexto.fragancia_seleccionada,
+        intentos_fallidos: this.contexto.intentos_fallidos 
+      } } };
     } catch (error) {
       return { json: { respuesta: `😕 Error. Email: ${CONFIG.EMAIL}`, quick_replies: ['Reiniciar'], contexto: { carrito: { items: [], total: 0 } }, error: error.message } };
     }
@@ -586,68 +574,60 @@ _noEntendido() {
     }, 100);
   }
   
-function formatearHora() {
-  return new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
-}
-
-function agregarMensaje(texto, tipo) {
-  if (!texto || texto.trim() === '') return;
-
-  const messageEl = document.createElement('div');
-  messageEl.className = tipo === 'user' ? 'user-message' : 'bot-message';
-
-  // Div principal del mensaje
-  const textoDiv = document.createElement('div');
-
-  // Manejo de negritas **texto**
-  const fragment = document.createDocumentFragment();
-  let lastIndex = 0;
-  const regex = /\*\*(.*?)\*\*/g;
-  let match;
-
-  while ((match = regex.exec(texto)) !== null) {
-    // Texto normal antes de **
-    if (match.index > lastIndex) {
-      fragment.appendChild(document.createTextNode(texto.substring(lastIndex, match.index)));
-    }
-    // Texto en negrita
-    const strong = document.createElement('strong');
-    strong.textContent = match[1]; // seguro contra XSS
-    fragment.appendChild(strong);
-    lastIndex = match.index + match[0].length;
-  }
-  // Texto restante
-  if (lastIndex < texto.length) {
-    fragment.appendChild(document.createTextNode(texto.substring(lastIndex)));
+  function formatearHora() {
+    return new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
   }
 
-  // Reemplazar saltos de línea por <br>
-  const nodes = [];
-  fragment.childNodes.forEach(node => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      node.textContent.split('\n').forEach((line, i, arr) => {
-        nodes.push(document.createTextNode(line));
-        if (i < arr.length - 1) nodes.push(document.createElement('br'));
-      });
-    } else {
-      nodes.push(node);
+  function agregarMensaje(texto, tipo) {
+    if (!texto || texto.trim() === '') return;
+
+    const messageEl = document.createElement('div');
+    messageEl.className = tipo === 'user' ? 'user-message' : 'bot-message';
+
+    const textoDiv = document.createElement('div');
+
+    const fragment = document.createDocumentFragment();
+    let lastIndex = 0;
+    const regex = /\*\*(.*?)\*\*/g;
+    let match;
+
+    while ((match = regex.exec(texto)) !== null) {
+      if (match.index > lastIndex) {
+        fragment.appendChild(document.createTextNode(texto.substring(lastIndex, match.index)));
+      }
+      const strong = document.createElement('strong');
+      strong.textContent = match[1];
+      fragment.appendChild(strong);
+      lastIndex = match.index + match[0].length;
     }
-  });
+    if (lastIndex < texto.length) {
+      fragment.appendChild(document.createTextNode(texto.substring(lastIndex)));
+    }
 
-  nodes.forEach(n => textoDiv.appendChild(n));
+    const nodes = [];
+    fragment.childNodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.textContent.split('\n').forEach((line, i, arr) => {
+          nodes.push(document.createTextNode(line));
+          if (i < arr.length - 1) nodes.push(document.createElement('br'));
+        });
+      } else {
+        nodes.push(node);
+      }
+    });
 
-  // Hora del mensaje
-  const timeDiv = document.createElement('div');
-  timeDiv.className = 'message-time';
-  timeDiv.textContent = formatearHora();
+    nodes.forEach(n => textoDiv.appendChild(n));
 
-  messageEl.appendChild(textoDiv);
-  messageEl.appendChild(timeDiv);
+    const timeDiv = document.createElement('div');
+    timeDiv.className = 'message-time';
+    timeDiv.textContent = formatearHora();
 
-  elements.messages.appendChild(messageEl);
-  scrollToBottom();
-}
+    messageEl.appendChild(textoDiv);
+    messageEl.appendChild(timeDiv);
 
+    elements.messages.appendChild(messageEl);
+    scrollToBottom();
+  }
   
   function mostrarIndicadorEscritura() {
     const indicator = document.createElement('div');
@@ -665,7 +645,7 @@ function agregarMensaje(texto, tipo) {
   
   function mostrarError(mensaje) {
     const errorEl = document.createElement('div');
-    errorEl.className = 'bot-message'; // Reutilizamos el estilo de mensaje de bot
+    errorEl.className = 'bot-message';
     errorEl.style.backgroundColor = '#ffdddd';
     errorEl.style.color = '#d8000c';
     errorEl.textContent = mensaje;
@@ -704,12 +684,10 @@ function agregarMensaje(texto, tipo) {
     if (!bloquear) elements.input.focus();
   }
   
-  // ✅ FUNCIÓN CLAVE REEMPLAZADA: Ya no usa fetch, llama a la lógica local.
   async function procesarLocalmente(mensaje) {
     try {
         const chatbot = new ChatBot(mensaje, state.contexto);
         const response = chatbot.obtenerRespuesta();
-        // Devolvemos la parte 'json' que es lo que el resto del código espera.
         return response.json;
     } catch (error) {
         console.error('Error en la lógica del ChatBot:', error);
@@ -731,7 +709,6 @@ function agregarMensaje(texto, tipo) {
     mostrarIndicadorEscritura();
     
     try {
-      // Simula una pequeña demora para que la respuesta no sea demasiado instantánea
       await new Promise(res => setTimeout(res, 500)); 
 
       const data = await procesarLocalmente(mensaje);
@@ -743,19 +720,34 @@ function agregarMensaje(texto, tipo) {
         agregarMensaje(data.respuesta, 'bot');
         if (data.quick_replies) mostrarQuickReplies(data.quick_replies);
         
-            if (data.accion_mailto) {
-        const url = data.accion_mailto.trim();
+        // ✅ VALIDACIÓN DE SEGURIDAD MEJORADA - OPEN REDIRECT ARREGLADO
+        if (data.accion_mailto) {
+          const url = data.accion_mailto.trim();
 
-        // Validar que sea un mailto
-        if (url.startsWith('mailto:')) {
+          // Validación estricta: debe empezar con mailto: al email configurado
+          const expectedPrefix = `mailto:${CONFIG.EMAIL}`;
+          
+          if (!url.startsWith(expectedPrefix)) {
+            console.warn('⚠️ URL mailto no autorizada:', url);
+            mostrarError('Error de seguridad: destino de email no válido');
+            return;
+          }
+          
+          // Validación adicional: detectar esquemas peligrosos
+          const urlLower = url.toLowerCase();
+          const dangerousSchemes = ['javascript:', 'data:', 'vbscript:', 'file:', 'about:'];
+          
+          if (dangerousSchemes.some(scheme => urlLower.includes(scheme))) {
+            console.warn('⚠️ Esquema peligroso detectado en mailto');
+            mostrarError('Error de seguridad: URL no permitida');
+            return;
+          }
+          
+          // Solo si pasa todas las validaciones, abrir el mailto
           setTimeout(() => { 
             window.location.href = url;
           }, 500);
-        } else {
-          console.warn('URL no permitida en accion_mailto:', url);
         }
-      }
-
         
       } else {
         throw new Error('Respuesta vacía o inválida del chatbot');
@@ -777,5 +769,5 @@ function agregarMensaje(texto, tipo) {
   });
   
   cargarContexto();
-  console.log('✅ Chatbot Francesca Olivia inicializado.');
+  console.log('✅ Chatbot Francesca Olivia inicializado (seguridad mejorada).');
 })();
