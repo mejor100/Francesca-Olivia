@@ -144,21 +144,18 @@ class Carrito {
     return `🛒 **TU PEDIDO:**\n\n${lineas.join('\n\n')}\n\n💵 **TOTAL: $${this.total.toLocaleString()}**`; 
   } 
   
-  generarEmailPedido() { 
+  // ✅ CAMBIO CRÍTICO: Ya NO retorna mailto:, solo los datos del pedido
+  obtenerDatosPedido() { 
     const lineas = this.items.map((item, i) => { 
       const p = PRODUCTOS[item.productoId]; 
       const f = item.fraganciaId ? FRAGANCIAS[item.fraganciaId] : null; 
       return `${i + 1}. ${item.cantidad}x ${p.nombre}${f ? ` - ${f.nombre}` : ''}\n   $${p.precio.toLocaleString()} c/u = $${(p.precio * item.cantidad).toLocaleString()}`; 
     }); 
     
-    const cuerpo = [
-      '¡Hola Francesca Olivia!', '', 'Quiero hacer el siguiente pedido:', '', 
-      '═══════════════════════════', ...lineas, '═══════════════════════════', 
-      `💵 TOTAL: $${this.total.toLocaleString()}`, '', 
-      'Por favor, contactame para coordinar forma de pago y envío.', '', '¡Gracias!'
-    ].join('\n'); 
-    
-    return `mailto:${CONFIG.EMAIL}?subject=Pedido Web - ${new Date().toLocaleDateString()}&body=${encodeURIComponent(cuerpo)}`; 
+    return {
+      lineas: lineas,
+      total: this.total
+    };
   } 
   
   toJSON() { 
@@ -477,9 +474,14 @@ class ChatBot {
     this._resetearEstado();
     return { respuesta: '🗑️ Carrito vaciado.', quick_replies: ['Ver productos'] }; 
   }
+  
+  // ✅ CAMBIO CRÍTICO: Ya no retorna accion_mailto, sino enviar_email: true
   _finalizarPedido() { 
     if (this.contexto.carrito.vacio) return { respuesta: '🛒 Carrito vacío.', quick_replies: ['Ver productos'] }; 
-    return { respuesta: `✅ **¡LISTO!**\n\n${this.contexto.carrito.obtenerResumen()}\n\n📧 Clic abajo para enviar.`, accion_mailto: this.contexto.carrito.generarEmailPedido() }; 
+    return { 
+      respuesta: `✅ **¡LISTO!**\n\n${this.contexto.carrito.obtenerResumen()}\n\n📧 Clic abajo para enviar.`, 
+      enviar_email: true  // ✅ Solo una bandera, no la URL
+    }; 
   }
 
   _noEntendido() {
@@ -524,7 +526,8 @@ class ChatBot {
   'use strict';
   
   const CONFIG_UI = {
-    STORAGE_KEY: 'francesca_chat_context'
+    STORAGE_KEY: 'francesca_chat_context',
+    EMAIL_DESTINO: 'esequielbelengimenez@gmail.com'  // ✅ Email hardcodeado en el frontend
   };
   
   const elements = {
@@ -684,6 +687,31 @@ class ChatBot {
     if (!bloquear) elements.input.focus();
   }
   
+  // ✅ NUEVA FUNCIÓN: Construye el mailto de forma segura
+  function construirMailtoSeguro(carritoData) {
+    const lineas = carritoData.items.map((item, i) => {
+      const p = PRODUCTOS[item.productoId];
+      const f = item.fraganciaId ? FRAGANCIAS[item.fraganciaId] : null;
+      return `${i + 1}. ${item.cantidad}x ${p.nombre}${f ? ` - ${f.nombre}` : ''}\n   $${p.precio.toLocaleString()} c/u = $${(p.precio * item.cantidad).toLocaleString()}`;
+    });
+
+    const cuerpo = [
+      '¡Hola Francesca Olivia!', '', 
+      'Quiero hacer el siguiente pedido:', '', 
+      '═══════════════════════════', 
+      ...lineas, 
+      '═══════════════════════════', 
+      `💵 TOTAL: $${carritoData.total.toLocaleString()}`, '', 
+      'Por favor, contactame para coordinar forma de pago y envío.', '', 
+      '¡Gracias!'
+    ].join('\n');
+
+    const asunto = `Pedido Web - ${new Date().toLocaleDateString()}`;
+    
+    // ✅ Construcción segura: email hardcodeado + datos sanitizados
+    return `mailto:${CONFIG_UI.EMAIL_DESTINO}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+  }
+  
   async function procesarLocalmente(mensaje) {
     try {
         const chatbot = new ChatBot(mensaje, state.contexto);
@@ -720,32 +748,13 @@ class ChatBot {
         agregarMensaje(data.respuesta, 'bot');
         if (data.quick_replies) mostrarQuickReplies(data.quick_replies);
         
-        // ✅ VALIDACIÓN DE SEGURIDAD MEJORADA - OPEN REDIRECT ARREGLADO
-        if (data.accion_mailto) {
-          const url = data.accion_mailto.trim();
-
-          // Validación estricta: debe empezar con mailto: al email configurado
-          const expectedPrefix = `mailto:${CONFIG.EMAIL}`;
+        // ✅ SOLUCIÓN DEFINITIVA AL OPEN REDIRECT
+        if (data.enviar_email === true) {
+          // Solo construimos el mailto si viene la bandera
+          const mailtoURL = construirMailtoSeguro(state.contexto.carrito);
           
-          if (!url.startsWith(expectedPrefix)) {
-            console.warn('⚠️ URL mailto no autorizada:', url);
-            mostrarError('Error de seguridad: destino de email no válido');
-            return;
-          }
-          
-          // Validación adicional: detectar esquemas peligrosos
-          const urlLower = url.toLowerCase();
-          const dangerousSchemes = ['javascript:', 'data:', 'vbscript:', 'file:', 'about:'];
-          
-          if (dangerousSchemes.some(scheme => urlLower.includes(scheme))) {
-            console.warn('⚠️ Esquema peligroso detectado en mailto');
-            mostrarError('Error de seguridad: URL no permitida');
-            return;
-          }
-          
-          // Solo si pasa todas las validaciones, abrir el mailto
-          setTimeout(() => { 
-            window.location.href = url;
+          setTimeout(() => {
+            window.location.href = mailtoURL;
           }, 500);
         }
         
@@ -769,5 +778,5 @@ class ChatBot {
   });
   
   cargarContexto();
-  console.log('✅ Chatbot Francesca Olivia inicializado (seguridad mejorada).');
+  console.log('✅ Chatbot Francesca Olivia inicializado (Open Redirect RESUELTO).');
 })();
