@@ -144,20 +144,6 @@ class Carrito {
     return `🛒 **TU PEDIDO:**\n\n${lineas.join('\n\n')}\n\n💵 **TOTAL: $${this.total.toLocaleString()}**`; 
   } 
   
-  // ✅ CAMBIO CRÍTICO: Ya NO retorna mailto:, solo los datos del pedido
-  obtenerDatosPedido() { 
-    const lineas = this.items.map((item, i) => { 
-      const p = PRODUCTOS[item.productoId]; 
-      const f = item.fraganciaId ? FRAGANCIAS[item.fraganciaId] : null; 
-      return `${i + 1}. ${item.cantidad}x ${p.nombre}${f ? ` - ${f.nombre}` : ''}\n   $${p.precio.toLocaleString()} c/u = $${(p.precio * item.cantidad).toLocaleString()}`; 
-    }); 
-    
-    return {
-      lineas: lineas,
-      total: this.total
-    };
-  } 
-  
   toJSON() { 
     return { items: this.items, total: this.total }; 
   } 
@@ -475,12 +461,11 @@ class ChatBot {
     return { respuesta: '🗑️ Carrito vaciado.', quick_replies: ['Ver productos'] }; 
   }
   
-  // ✅ CAMBIO CRÍTICO: Ya no retorna accion_mailto, sino enviar_email: true
   _finalizarPedido() { 
     if (this.contexto.carrito.vacio) return { respuesta: '🛒 Carrito vacío.', quick_replies: ['Ver productos'] }; 
     return { 
       respuesta: `✅ **¡LISTO!**\n\n${this.contexto.carrito.obtenerResumen()}\n\n📧 Clic abajo para enviar.`, 
-      enviar_email: true  // ✅ Solo una bandera, no la URL
+      enviar_email: true
     }; 
   }
 
@@ -501,6 +486,7 @@ class ChatBot {
     };
   }
   
+  // ✅ FIX CRÍTICO: NO pasar error.message en la respuesta
   obtenerRespuesta() {
     try {
       const resultado = this.procesar();
@@ -514,7 +500,16 @@ class ChatBot {
         intentos_fallidos: this.contexto.intentos_fallidos 
       } } };
     } catch (error) {
-      return { json: { respuesta: `😕 Error. Email: ${CONFIG.EMAIL}`, quick_replies: ['Reiniciar'], contexto: { carrito: { items: [], total: 0 } }, error: error.message } };
+      // ✅ Solo loguear el error, NO devolverlo en la respuesta
+      console.error('[ChatBot Error]', error);
+      return { 
+        json: { 
+          respuesta: `😕 Error inesperado. Por favor, contactanos: ${CONFIG.EMAIL}`, 
+          quick_replies: ['Reiniciar'], 
+          contexto: { carrito: { items: [], total: 0 } }
+          // ✅ NO incluimos error.message
+        } 
+      };
     }
   }
 }
@@ -527,7 +522,7 @@ class ChatBot {
   
   const CONFIG_UI = {
     STORAGE_KEY: 'francesca_chat_context',
-    EMAIL_DESTINO: 'esequielbelengimenez@gmail.com'  // ✅ Email hardcodeado en el frontend
+    EMAIL_DESTINO: 'esequielbelengimenez@gmail.com'
   };
   
   const elements = {
@@ -550,7 +545,9 @@ class ChatBot {
     try {
       const data = JSON.stringify({ contexto: state.contexto, timestamp: Date.now() });
       sessionStorage.setItem(CONFIG_UI.STORAGE_KEY, data);
-    } catch (e) { console.warn('No se pudo guardar el contexto:', e); }
+    } catch (e) { 
+      console.warn('No se pudo guardar el contexto:', e); 
+    }
   }
   
   function cargarContexto() {
@@ -687,7 +684,7 @@ class ChatBot {
     if (!bloquear) elements.input.focus();
   }
   
-  // ✅ NUEVA FUNCIÓN: Construye el mailto de forma segura
+  // ✅ Construcción SEGURA del mailto con email hardcodeado
   function construirMailtoSeguro(carritoData) {
     const lineas = carritoData.items.map((item, i) => {
       const p = PRODUCTOS[item.productoId];
@@ -708,7 +705,6 @@ class ChatBot {
 
     const asunto = `Pedido Web - ${new Date().toLocaleDateString()}`;
     
-    // ✅ Construcción segura: email hardcodeado + datos sanitizados
     return `mailto:${CONFIG_UI.EMAIL_DESTINO}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
   }
   
@@ -718,6 +714,7 @@ class ChatBot {
         const response = chatbot.obtenerRespuesta();
         return response.json;
     } catch (error) {
+        // ✅ NO devolver error.message al usuario
         console.error('Error en la lógica del ChatBot:', error);
         return { 
             respuesta: '😕 Ocurrió un error inesperado. Por favor, intenta de nuevo.',
@@ -748,9 +745,8 @@ class ChatBot {
         agregarMensaje(data.respuesta, 'bot');
         if (data.quick_replies) mostrarQuickReplies(data.quick_replies);
         
-        // ✅ SOLUCIÓN DEFINITIVA AL OPEN REDIRECT
+        // ✅ Solo construir mailto si viene la bandera
         if (data.enviar_email === true) {
-          // Solo construimos el mailto si viene la bandera
           const mailtoURL = construirMailtoSeguro(state.contexto.carrito);
           
           setTimeout(() => {
@@ -778,5 +774,5 @@ class ChatBot {
   });
   
   cargarContexto();
-  console.log('✅ Chatbot Francesca Olivia inicializado (Open Redirect RESUELTO).');
+  console.log('✅ Chatbot Francesca Olivia inicializado (100% seguro contra Open Redirect).');
 })();
